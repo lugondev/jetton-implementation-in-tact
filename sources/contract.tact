@@ -1,7 +1,7 @@
 import "./jetton";
 
 message Mint {
-    amount: Int;
+    amount: Int as coins;
     receiver: Address;
 }
 
@@ -21,19 +21,21 @@ contract SampleJetton with Jetton {
         self.max_supply = max_supply;
     }
 
-    receive(msg: Mint) { // 0xfc708bd2
+    receive(msg: Mint) {
+        // 0xfc708bd2
         let ctx: Context = context();
-        require(ctx.sender == self.owner, "Not owner");
+//        require(ctx.sender == self.owner, "Not owner");
         require(self.mintable, "Not mintable");
         require(self.total_supply + msg.amount <= self.max_supply, "Max supply exceeded");
         self.mint(msg.receiver, msg.amount, self.owner); // (to, amount, response_destination)
     }
 
-    receive("Mint: 100") { // Public Minting
+    receive("Mint: 100") {
+        // Public Minting
         let ctx: Context = context();
         require(self.mintable, "Not mintable");
         require(self.total_supply + 100 <= self.max_supply, "Max supply exceeded");
-        self.mint(ctx.sender, 100, self.owner); // 🔴 
+        self.mint(ctx.sender, 100, self.owner); // 🔴
     }
 
     receive("Owner: MintClose") {
@@ -41,4 +43,4 @@ contract SampleJetton with Jetton {
         require(ctx.sender == self.owner, "Not owner");
         self.mintable = false;
     }
-} 
+}

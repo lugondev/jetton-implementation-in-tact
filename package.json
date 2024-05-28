@@ -3,7 +3,7 @@
   "scripts": {
     "build": "tact --config ./tact.config.json",
     "test": "jest",
-    "deploy": "ts-node ./sources/contract.deploy.ts",
+    "deploy": "ts-node ./sources/contract.deploy2.ts",
     "read": "ts-node ./sources/contract.read.ts",
     "d1": "ts-node ./sources/1_Transfer.ts",
     "d2": "ts-node ./sources/2_TransferURL.ts"
@@ -13,6 +13,7 @@
     "@dedust/sdk": "^0.8.6",
     "@ston-fi/sdk": "^0.4.0",
     "@tact-lang/compiler": "^1.2.0",
+    "@tact-lang/deployer": "^0.2.0",
     "@tact-lang/emulator": "^3.2.2",
     "@ton/core": "^0.54.0",
     "@ton/crypto": "^3.2.0",
